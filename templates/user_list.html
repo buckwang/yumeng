@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>宇萌兼职</title>
+    </head>
+    <body>
+        <form action="/user_list/" method="post">
+            <p>名称：{{obj.name}}<span>{{errors.name}}</p>
+            <p>性别：{{obj.sex}}<span>{{errors.sex}}</p>
+            <p>手机号：{{obj.phone}}<span>{{errors.phone}}</p>
+            <p>院校：{{obj.school}}<span>{{errors.school}}</p>
+            <input type="submit" value="提交">
+        </form>
+
+
+    </body>
+</html>

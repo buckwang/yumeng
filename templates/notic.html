@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>宇萌兼职</title>
+         <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    </head>
+    <body>
+
+           <!-- <li>{{ t.name }}-----{{ t.work_time}}</li>
+           -->
+           <div class="panel panel-primary">
+           	    <div class="panel-heading">
+		            <h3 class="panel-title">兼职公告</h3>
+	            </div>
+           	    <div class="panel-body">
+
+	            <table border="1" class="table table-striped table-hover">
+                    <thead>
+                        <tr class="active">
+                                <th class="success">工作内容</th>
+                                <th class="warning">工作时间</th>
+                                <th class="danger">工作地点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in notices %}
+                        <tr >
+                        <td >{{ t.name }} </td>
+                        <td >{{ t.work_time}}</td>
+                        <td > {{ t.work_location }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                </div>
+           </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+                <h3 class="panel-title">报名</h3>
+        </div>
+        <div class="panel-body">
+        <form action="/notic/" method="post" class="form-horizontal">
+
+            <p>名称：{{obj.name}}<span>{{errors.name}}</p>
+            <p>性别：{{obj.sex}}<span>{{errors.sex}}</p>
+            <p>手机号：{{obj.phone}}<span>{{errors.phone}}</p>
+            <p>院校：{{obj.school}}<span>{{errors.school}}</p>
+            <p>报名内容：{{obj.content}}<span>{{errors.content}}</p>
+            <input type="submit" value="提交">
+        </form>
+        </div>
+    </div>
+    </body>
+</html>
