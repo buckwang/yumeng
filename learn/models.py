@@ -27,6 +27,7 @@ class Work(models.Model):
 	name = models.CharField(max_length = 128,verbose_name = "名字")
 	work_time = models.CharField(max_length = 128,verbose_name = "工作时间")
 	work_location= models.CharField(max_length = 128,verbose_name = "工作地点")
+	#slug = models.CharField(max_length = 128,verbose_name = "slug")
 #	work_content= models.CharField(max_length = 128,verbose_name = "work content")
 #	work_requirment= models.CharField(max_length = 128,verbose_name = "work requirment")
 #	payment= models.CharField(max_length = 128,verbose_name = "payment")
