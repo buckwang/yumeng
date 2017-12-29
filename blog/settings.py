@@ -118,6 +118,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+EMAIL_HOST = 'smtp.sina.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'wangyu_0898@sina.com'
+EMAIL_HOST_PASSWORD = 'wang@1985'
+EMAIL_SUBJECT_PREFIX = u'[wangyu]'
+EMAIL_USE_TLS = True
+SERVER_EMAIL = 'wangyu1985@163.com'            #The email address that error messages come from, such as those sent to ADMINS and MANAGERS.
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 

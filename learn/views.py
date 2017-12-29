@@ -16,6 +16,7 @@ from django.urls import reverse
 from .forms import UserInfo
 from openpyxl import Workbook
 from openpyxl import  load_workbook
+from django.core.mail import EmailMultiAlternatives
 # Create your views here.
 
 i=0
@@ -123,6 +124,13 @@ def xls_process(UserInfo):
 	f_roll = user_input_obj.cleaned_data['content']
 	ws.append({'A': j, 'B': f_name, 'C': f_phone, 'D': f_sex, 'E': f_school,'F':f_roll})
 	wb.save('roll number.xlsx')
+	subject, form_email, to = 'hello', 'wangyu_0898@sina.com', '270179788@qq.com'
+	text_content = 'this is a test to send msg from django'
+	html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
+	msg = EmailMultiAlternatives(subject, text_content, form_email, [to])
+	msg.attach_alternative(html_content, 'text/html')
+	msg.attach_file('roll number.xlsx')
+	msg.send()
 
 def notic(request):
 
