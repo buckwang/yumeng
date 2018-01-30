@@ -41,3 +41,13 @@ class Work(models.Model):
 
 	class Meta:
 		verbose_name = verbose_name_plural = "兼职公告"
+
+
+class User(models.Model):
+	name = models.CharField(max_length=20, null=False)
+	email = models.EmailField()
+	password = models.CharField(max_length=20, null=False)
+	enable = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.name

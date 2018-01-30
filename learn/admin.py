@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 #from .models import Student
-from .models import Work 
+from .models import Work
+from learn import models
 # Register your models here.
 
 class WorkAdmin(admin.ModelAdmin):
@@ -26,4 +27,5 @@ class WorkAdmin(admin.ModelAdmin):
 	) 
 
 admin.site.register(Work,WorkAdmin)
+admin.site.register(models.User)
 #admin.site.register(Student,StudentAdmin)

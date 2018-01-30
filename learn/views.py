@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
-
+from django.template import RequestContext
 from django.http import HttpResponse
 from django.template.loader import get_template
+from django.shortcuts import redirect
 
-
+from learn import models
+from .forms import LoginForm
+#from learn import forms
 from .models import Work
+
 from django import forms
 
 
@@ -64,30 +68,14 @@ def user_list(request):
 
 
 def index(request):
+	if 'username' in request.session:
+		username = request.session['username']
+		useremail = request.session['useremail']
 	template = get_template('index.html')
 	html = template.render(locals())
 	return HttpResponse(html)
 
-def login(request):
-	global i
-	#f_obj = UserInfo()
-	print'enter login process'
-	try:
-		f_name = request.GET['username']
-		print f_name
-	except:
-		f_name = 'default'
-		print 'no data'
-	'''if request.method == 'POST':
 
-		user_input_obj = UserInfo(request.POST)
-		f_name = request.GET['name']
-		print 'is too'
-		if user_input_obj.is_valid():
-			print f_sex
-		else:
-			return render(request, 'login.html', {'obj': user_input_obj})'''
-	return render(request,'login.html')
 
 def contact(request):
 	template = get_template('contact.html')
@@ -175,3 +163,46 @@ def notic(request):
 #        'form': form,
 #    }
 #    return render(request, 'student.html', context=context)
+def login(request):
+	obj_login = LoginForm()
+	#message = '请您登录'
+	if request.method == 'POST':
+		login_form = LoginForm(request.POST)
+		print('enter post')
+		if login_form.is_valid():
+			login_name = login_form.cleaned_data['username']
+			login_password = login_form.cleaned_data['password']
+			#login_name=request.POST['username'].strip()
+			#login_password=request.POST['password']
+			print('the user login name is %s',login_name)
+			print('the user login password is %s', login_password)
+			#user = authenticate(username=login_name, password=login_password)
+			try:
+				#temp_user = User.objects.get(name= wangyu)
+				#userAll = models.User.objects.all()
+
+				#user = User.objects.get(name='wangyu') 不正确语法，所以错误
+				user = models.User.objects.get(name= login_name )
+				print('find the temp user  %s', user)
+				if user.password == login_password:
+					response = redirect('/')
+					request.session['username'] = user.name
+					request.session['useremail'] = user.email
+					print('yes it is member')
+					return redirect('/')
+				else:
+					message = "密码错误，请再检查一次"
+			except:
+				print('exception')
+				message ="目前无法登陆"
+		else:
+			message = "请检查输入的字段内容"
+	else:
+		login_form = LoginForm()
+
+	template = get_template('login.html')
+	#request_context = RequestContext(request)
+	#request_context.push(locals())
+	#html = template.render(locals())
+	return render(request, 'login.html', context={'obj': obj_login,'message' : message})
+	#return HttpResponse(html)

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django import forms
+from learn import models
 
 #from .models import Work
 
@@ -30,4 +31,6 @@ class UserInfo(forms.Form):
 	)
 	content = forms.CharField()
 
-
+class LoginForm(forms.Form):
+    username = forms.CharField(label='姓名', max_length=10)
+    password = forms.CharField(label='密码', widget=forms.PasswordInput())
